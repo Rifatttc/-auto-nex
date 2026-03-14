@@ -17,6 +17,7 @@ echo -e "\e[1;37m  [2] \e[1;32mUPCOMING PROJECTS\e[0m"
 echo -e "\e[1;37m  [3] \e[1;32mDIRECTORY MANAGER\e[0m"
 echo -e "\e[1;37m  [4] \e[1;36mSYSTEM UPDATE & UPGRADE\e[0m"
 echo -e "\e[1;37m  [5] \e[1;31mEXIT TO TERMINAL\e[0m"
+echo -e "\e[1;37m  [6] \e[1;33mUPDATE NEX TOOL\e[0m"
 echo -e "\e[1;37m  [0] \e[1;35mREFRESH MENU\e[0m"
 echo -e "\e[1;34m####################################################\e[0m"
 read -p "  Selection: " choice
@@ -44,6 +45,13 @@ case $choice in
         sleep 4; ~/menu.sh
         ;;
     5) clear; exit ;;
+    6)
+        echo -e "\n\e[1;33m[i] Checking for Nex Tool updates from GitHub...\e[0m"
+        cd ~/-auto-nex && git pull
+        chmod +x menu.sh
+        echo -e "\e[1;32m[✔] Update Complete! Reloading...\e[0m"
+        sleep 2; ~/menu.sh
+        ;;
     0) ~/menu.sh ;;
     *) echo -e "\n\e[1;31m  Invalid Choice!\e[0m"; sleep 1; ~/menu.sh ;;
 esac
