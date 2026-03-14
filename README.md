@@ -1,16 +1,16 @@
 # AUTO-NEX: FREE AUTOMATION HUB
-A professional terminal dashboard for managing Binance Bots, System Updates, and Directory Management.
+A professional terminal dashboard for System Maintenance and Tool Updates.
 
 ## Features
-- **Start Binance Bot**: Run your crypto trading bot instantly.
-- **System Update & Upgrade**: One-click system maintenance.
-- **Directory Manager**: Quick access to your project files.
-- **Auto-Refresh**: Stay updated with a clean UI.
+- **System Update & Upgrade**: Keep your Termux packages up to date.
+- **Update Nex Tool**: Directly update this tool from GitHub.
+- **Upcoming Projects**: Stay tuned for new automation scripts.
 
-## Installation
-Run the following command in Termux:
+## Installation & Auto-Run
+Run this single command to install and set up AUTO-NEX as your default Termux dashboard:
+
 ```bash
-pkg install git -y && git clone https://github.com/Rifatttc/-auto-nex && cd -auto-nex && chmod +x menu.sh && ./menu.sh
+pkg install git -y && git clone https://github.com/Rifatttc/-auto-nex && cd -auto-nex && chmod +x menu.sh && cp menu.sh ~/ && echo '~/menu.sh' >> ~/.bashrc && ~/menu.sh
 ```
 
 ## Developer
