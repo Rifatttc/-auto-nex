@@ -1,57 +1,127 @@
 clear
-echo -e "\e[1;36m####################################################\e[0m"
-echo -e "\e[1;32m     _   _   _ _____ ___        _   _ _______  \e[0m"
-echo -e "\e[1;32m    / \ | | | |_   _/ _ \      | \ | | ____\ \/ / \e[0m"
-echo -e "\e[1;32m   / _ \| | | | | || | | |_____|  \| |  _|  \  /   \e[0m"
-echo -e "\e[1;32m  / ___ \ |_| | | || |_| |_____| |\  | |___ /  \   \e[0m"
-echo -e "\e[1;32m /_/   \_\___/  |_| \___/      |_| \_|_____/_/\_\  \e[0m"
-echo -e "\e[1;34m----------------------------------------------------\e[0m"
-echo -e "\e[1;37m  DEVELOPER : \e[1;33mYounus Ali\e[0m"
-echo -e "\e[1;37m  GITHUB    : \e[1;33mrifatttc\e[0m"
-echo -e "\e[1;37m  SOCIAL    : \e[1;33m@Younus.fb\e[0m"
-echo -e "\e[1;34m----------------------------------------------------\e[0m"
-echo -e "\e[1;33m             AUTO-NEX: FREE AUTOMATION HUB          \e[0m"
-echo -e "\e[1;34m####################################################\e[0m"
-echo -e "\e[1;37m  [1] \e[1;32mSTART BINANCE BOT\e[0m"
-echo -e "\e[1;37m  [2] \e[1;32mUPCOMING PROJECTS\e[0m"
-echo -e "\e[1;37m  [3] \e[1;32mDIRECTORY MANAGER\e[0m"
-echo -e "\e[1;37m  [4] \e[1;36mSYSTEM UPDATE & UPGRADE\e[0m"
-echo -e "\e[1;37m  [5] \e[1;31mEXIT TO TERMINAL\e[0m"
-echo -e "\e[1;37m  [6] \e[1;33mUPDATE NEX TOOL\e[0m"
-echo -e "\e[1;37m  [0] \e[1;35mREFRESH MENU\e[0m"
-echo -e "\e[1;34m####################################################\e[0m"
-read -p "  Selection: " choice
-case $choice in
-    1) cd ~/binance-bot && python main.py ;;
-    2) echo -e "\n\e[1;33m  [i] New free tools coming soon...\e[0m"; sleep 2; ~/menu.sh ;;
-    3) cd ~/binance-bot && ls -la ;;
-    4) 
-        echo -e "\n\e[1;36m[1/3] Fetching package list updates...\e[0m"
-        apt update
-        echo -e "\n\e[1;33m[2/3] Checking for upgradable packages:\e[0m"
-        apt list --upgradable
-        UPGRADABLE=$(apt list --upgradable 2>/dev/null | grep -c "upgradable")
-        if [ $UPGRADABLE -gt 0 ]; then
-            echo -e "\n\e[1;32m[!] Total $UPGRADABLE packages can be updated.\e[0m"
-            echo -n -e "\e[1;37m[?] Press ENTER to Start Update & Upgrade (or CTRL+C to Exit): \e[0m"
-            read confirm
-            echo -e "\e[1;32m\n[3/3] Starting System Upgrade... Please wait.\e[0m"
-            apt upgrade -y
-            echo -e "\n\e[1;32m[✔] System Update & Upgrade Successful!\e[0m"
-        else
-            echo -e "\n\e[1;32m[✔] No updates available. System is already clean.\e[0m"
+# মুভি স্টাইল টাইপিং ইফেক্ট
+typing_effect() {
+    text="$1"
+    for (( i=0; i<${#text}; i++ )); do
+        echo -n "${text:$i:1}"
+        sleep 0.005
+    done
+    echo ""
+}
+
+# প্রোফেশনাল ফাইল ম্যানেজার
+file_manager() {
+    while true; do
+        clear
+        # টপ স্টাইলিশ হেডার
+        echo -e "\e[1;31m┌──────────────────────────────────────────────────┐"
+        echo -e "│ \e[1;32m● \e[1;33m● \e[1;31m● \e[1;37m CORE_SYSTEM_ACCESS \e[1;31m| \e[1;36mSHELL_V3.0 \e[1;31m    │"
+        echo -e "└──────────────────────────────────────────────────┘\e[0m"
+        
+        # বর্তমান লোকেশন বার
+        echo -e "\e[1;31m[\e[1;37mNODE\e[1;31m] \e[1;32m>> \e[1;36m$(pwd)\e[0m"
+        echo -e "\e[1;31m----------------------------------------------------\e[0m"
+        
+        # ফাইল এবং ফোল্ডার সর্টিং লজিক
+        all_items=($(ls))
+        dirs=(); files=()
+        for item in "${all_items[@]}"; do
+            [ -d "$item" ] && dirs+=("$item") || files+=("$item")
+        done
+        sorted_list=("${dirs[@]}" "${files[@]}")
+        
+        # টেবিল হেডার
+        echo -e "\e[1;32mID    TYPE          NAME\e[0m"
+        echo -e "\e[1;31m──    ────          ────\e[0m"
+        
+        # ব্যাক অপশন
+        printf "\e[1;31m[\e[1;37m00\e[1;31m]  \e[1;35m<DIR_RECOVERY> \e[1;35m.. (BACK_TO_ROOT)\e[0m\n"
+        
+        # লুপ দিয়ে ফাইল/ফোল্ডার সাজানো
+        i=1
+        for item in "${sorted_list[@]}"; do
+            if [ -d "$item" ]; then
+                printf "\e[1;31m[\e[1;32m%02d\e[1;31m]  \e[1;33m{DIRECTORY}    \e[1;32m%s\e[0m\n" "$i" "$item"
+            else
+                printf "\e[1;31m[\e[1;32m%02d\e[1;31m]  \e[1;36m[DATA_FILE]    \e[1;37m%s\e[0m\n" "$i" "$item"
+            fi
+            ((i++))
+        done
+        
+        echo -e "\e[1;31m----------------------------------------------------\e[0m"
+        echo -ne "\e[1;33m[?] SELECT TARGET ID OR \"Q\" TO DISCONNECT: \n\e[1;31mHACKER@ROOT_SHELL# \e[0m"
+        read choice
+        
+        if [[ "$choice" == "q" || "$choice" == "Q" ]]; then 
+            typing_effect ">> DISCONNECTING ENCRYPTED TUNNEL..."
+            break
         fi
-        echo -e "\e[1;34m[i] Returning to menu in 4 seconds...\e[0m"
-        sleep 4; ~/menu.sh
-        ;;
-    5) clear; exit ;;
-    6)
-        echo -e "\n\e[1;33m[i] Checking for Nex Tool updates from GitHub...\e[0m"
-        cd ~/-auto-nex && git pull
-        chmod +x menu.sh
-        echo -e "\e[1;32m[✔] Update Complete! Reloading...\e[0m"
-        sleep 2; ~/menu.sh
-        ;;
-    0) ~/menu.sh ;;
-    *) echo -e "\n\e[1;31m  Invalid Choice!\e[0m"; sleep 1; ~/menu.sh ;;
-esac
+        
+        if [[ "$choice" == "00" || "$choice" == "0" ]]; then 
+            cd ..
+            continue # অটোমেটিক আবার লিস্ট দেখাবে
+        fi
+        
+        if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -le "${#sorted_list[@]}" ] && [ "$choice" -gt 0 ]; then
+            target="${sorted_list[$((choice-1))]}"
+            if [ -d "$target" ]; then
+                cd "$target"
+                # এখানে কোনো ব্রেক বা রিড নেই, সরাসরি লুপের শুরুতে গিয়ে আবার লিস্ট দেখাবে
+            else
+                clear
+                echo -e "\e[1;31m"
+                typing_effect ">> INJECTING PAYLOAD TO: $target"
+                typing_effect ">> EXECUTING BINARY..."
+                echo -e "\e[0m"
+                
+                if [[ "$target" == *.sh ]]; then bash "$target"
+                elif [[ "$target" == *.py ]]; then python "$target"
+                elif [[ "$target" == *.php ]]; then php "$target"
+                else cat "$target"; fi
+                
+                echo -e "\n\e[1;32m>> EXECUTION FINISHED.\e[0m"
+                echo -e "\e[1;33mPress Enter to return to Explorer...\e[0m"
+                read
+            fi
+        else
+            # যদি ভুল কমান্ড দেয়, তবে সরাসরি ওই কমান্ড রান করবে (যেমন: rm, cp ইত্যাদি)
+            clear
+            eval $choice
+            echo -e "\n\e[1;32mCommand Finished. Press Enter...\e[0m"
+            read
+        fi
+    done
+}
+
+# মেইন লুপ শুরু
+while true; do
+    clear
+    echo -e "\e[1;32m     _   _   _ _____ ___        _   _ _______  "
+    echo -e "\e[1;32m    / \ | | | |_   _/ _ \      | \ | | ____\ \/ / "
+    echo -e "\e[1;32m   / _ \| | | | | || | | |_____|  \| |  _|  \  /   "
+    echo -e "\e[1;32m  / ___ \ |_| | | || |_| |_____| |\  | |___ /  \   "
+    echo -e "\e[1;32m /_/   \_\___/  |_| \___/      |_| \_|_____/_/\_\ \e[0m"
+    echo -e "\e[1;34m----------------------------------------------------\e[0m"
+    echo -e "\e[1;33m             AUTO-NEX: FREE AUTOMATION HUB          \e[0m"
+    echo -e "\e[1;34m####################################################\e[0m"
+    echo -e "  \e[1;37m[1] \e[1;32m✨ UPCOMING PROJECTS\e[0m"
+    echo -e "  \e[1;36m[2] \e[1;36m⚙️  SYSTEM UPDATE\e[0m"
+    echo -e "  \e[1;33m[3] \e[1;33m🔄 UPDATE NEX TOOL\e[0m"
+    echo -e "  \e[1;31m[4] \e[1;31m❌ EXIT TO TERMUX\e[0m"
+    echo -e "\e[1;34m####################################################\e[0m"
+    
+    read -p "STYLISH TERMINAL# " cmd
+    case $cmd in
+        1) echo -e "\n\e[1;33m  [i] Scanning database...\e[0m"; sleep 1 ;;
+        2) apt update && apt upgrade -y; echo -e "\n\e[1;32mSYSTEM UPDATED SUCCESSFULLY\e[0m"; read ;;
+        3) cd ~/auto-nex && git pull && chmod +x menu.sh; echo -e "\n\e[1;32m  Updated!\e[0m"; read ;;
+        4) clear; exit ;;
+        "") continue ;; 
+        ls) file_manager ;; 
+        *) 
+            clear
+            typing_effect ">> EXECUTING COMMAND: $cmd"
+            eval $cmd
+            echo -e "\n\e[1;33mPress Enter to return...\e[0m"; read ;;
+    esac
+done
